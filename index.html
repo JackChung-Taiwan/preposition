@@ -487,7 +487,7 @@ function sceneFor(prep){
   if(prep==="among") return [ [10,12,'#1976d2'],[50,8,'#1976d2'],[92,18,'#1976d2'],[18,62,'#1976d2'],[58,44,'#d22'],[96,62,'#1976d2']].map((p,i)=>ball(i===4?"move":"",`left:${p[0]}px;top:${p[1]}px;background:${p[2]}`)).join("");
   if(prep==="between") return wall("left:18px;top:20px",true)+wall("right:18px;top:20px",true)+b("left:46px;top:43px");
   if(prep==="behind") return pet("🐱","move","left:38px;top:4px;z-index:2")+wall("left:36px;top:42px",true);
-  if(prep==="front") return wall("left:54px;top:23px",true)+pet("🐱","move","left:18px;top:48px;z-index:5");
+ if(prep==="front") return wall("left:54px;top:23px",true)+pet("🐱","move","left:44px;top:42px;z-index:5");
   if(prep==="along") return `
     <div style="position:absolute;left:18px;top:8px;width:92px;height:72px;border-radius:50%;background:#18e88a;border:3px solid #0bb86a;overflow:hidden">
       <div style="position:absolute;left:20px;top:-10px;width:6px;height:100px;background:#111;transform:rotate(10deg)"></div>
