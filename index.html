@@ -208,8 +208,13 @@
   .play[data-prep="in"] .move{animation:inBox .9s ease-in-out}
   @keyframes inBox{50%{transform:translateY(35px) scale(.75)}100%{transform:translateY(0)}}
 
-  .play[data-prep="on"] .move{animation:onTop .9s ease-in-out}
-  @keyframes onTop{50%{transform:translateY(-18px)}100%{transform:translateY(0)}}
+  .play[data-prep="on"] .move{animation:onPulse .9s ease-in-out}
+
+@keyframes onPulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.35)}
+  100%{transform:scale(1)}
+}
 
   .play[data-prep="at"] .move{animation:atPulse .8s ease-in-out}
   @keyframes atPulse{50%{transform:scale(1.25);filter:drop-shadow(0 0 10px #ff4747)}}
@@ -244,13 +249,13 @@
   .play[data-prep="behind"] .move{animation:hideBehind .9s ease-in-out}
   @keyframes hideBehind{50%{transform:translateY(36px);opacity:.38}100%{transform:translateY(0);opacity:1}}
 
-  .play[data-prep="front"] .move{animation:frontPop .9s ease-in-out}
-  @keyframes frontPop{50%{transform:translateY(-10px) scale(1.22)}}
-  .play[data-prep="along"] .along-arrow{animation:alongRoad 1s ease-in-out}
-  .along-arrow{
-    transform:rotate(10deg);
-    transform-origin:center center;
-  }
+  .play[data-prep="front"] .move{animation:frontPulse .9s ease-in-out}
+
+@keyframes frontPulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.28)}
+  100%{transform:scale(1)}
+}
   @keyframes alongRoad{
     0%{transform:rotate(10deg) translateY(0)}
     50%{transform:rotate(10deg) translateY(44px)}
