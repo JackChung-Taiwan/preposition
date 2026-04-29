@@ -272,15 +272,23 @@
 
 
 
-  .play[data-prep="up"] .move{animation:rollUp 1s ease forwards}
-
-@keyframes rollUp{
-  0%{transform:translate(0,0) rotate(0deg)}
-  100%{transform:translate(60px,-40px) rotate(360deg)}
+  .play[data-prep="up"] .move{
+  animation:rollUp 1s ease forwards;
 }
 
-  .play[data-prep="down"] .move{animation:goDown .9s ease-in-out}
-  @keyframes goDown{50%{transform:translate(28px,32px)}100%{transform:translate(0)}}
+@keyframes rollUp{
+  0%   { transform:translate(0,0) rotate(0deg); }
+  100% { transform:translate(62px,-42px) rotate(360deg); }
+}
+
+  .play[data-prep="down"] .move{
+  animation:rollDown 1s ease forwards;
+}
+
+@keyframes rollDown{
+  0%   { transform:translate(0,0) rotate(0deg); }
+  100% { transform:translate(-62px,42px) rotate(-360deg); }
+}
 
   .play[data-prep="opposite"] .move{animation:oppositeMove .9s ease-in-out}
   @keyframes oppositeMove{50%{transform:translateX(-26px)}}
@@ -508,16 +516,32 @@ function sceneFor(prep){
     </div>
   `;
   if(prep==="up") return `
-  <div style="position:absolute;left:20px;bottom:10px;width:90px;height:60px;
-    background:linear-gradient(to top right, transparent 0 50%, #d9a15f 50% 100%)">
-  </div>
-  <div class="ball move" style="left:18px;top:58px"></div>
+  <!-- 斜坡（往右上） -->
+  <div style="
+    position:absolute;
+    left:20px;
+    top:40px;
+    width:90px;
+    height:60px;
+    background:linear-gradient(to top right, transparent 0 50%, #d9a15f 50% 100%);
+  "></div>
+
+  <!-- 紅球（從左下開始） -->
+  <div class="ball move" style="left:18px;top:68px"></div>
 `;
   if(prep==="down") return `
-  <div style="position:absolute;left:20px;bottom:10px;width:90px;height:60px;
-    background:linear-gradient(to top right, transparent 0 50%, #d9a15f 50% 100%)">
-  </div>
-  <div class="ball move" style="left:70px;top:10px"></div>
+  <!-- 斜坡（同方向） -->
+  <div style="
+    position:absolute;
+    left:20px;
+    top:40px;
+    width:90px;
+    height:60px;
+    background:linear-gradient(to top right, transparent 0 50%, #d9a15f 50% 100%);
+  "></div>
+
+  <!-- 紅球（從右上開始） -->
+  <div class="ball move" style="left:80px;top:10px"></div>
 `;
   if(prep==="opposite") return `<div class="emoji move opposite-left" style="left:4px;top:34px">🚗</div><div class="emoji move opposite-right" style="right:4px;top:34px;transform:scaleX(-1)">🚙</div><div class="arrow" style="left:0px;top:62px">←</div><div class="arrow" style="right:0px;top:62px">→</div>`;
   if(prep==="onto") return box("left:44px;top:44px")+pet("🐶","move","left:14px;top:14px");
