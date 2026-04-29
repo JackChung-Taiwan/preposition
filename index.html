@@ -15,7 +15,11 @@
   }
   .poster{
     width:min(1180px,96vw);
-    margin:0 auto; height:100vh; display:flex; flex-direction:column; justify-content:center;
+    min-height:100vh;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
     background:#fffdf2;
     border:8px solid #fff;
     border-radius:28px;
@@ -53,8 +57,8 @@
     gap:18px;
   }
   .titleIcon{
-    width:144px;
-    height:144px;
+    width:clamp(80px,14vw,144px);
+    height:clamp(80px,14vw,144px);
     object-fit:contain;
   }
 
@@ -315,24 +319,114 @@
   100% { transform:translateX(72px); }
 }
 
-  @media(max-width:850px){
-    .row{grid-template-columns:110px repeat(3,1fr)}
-    .rowTitle{font-size:18px}
   
-  .titleWrap{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:18px;
-  }
-  .titleIcon{
-    width:216px;
-    height:216px;
-    object-fit:contain;
+  @media(max-width:1200px){
+    .poster{
+      width:100vw;
+      border-radius:0;
+      border-width:4px;
+    }
+    h1{
+      font-size:clamp(28px,6vw,56px);
+    }
+    .row{
+      grid-template-columns:140px repeat(6, 1fr);
+      min-height:118px;
+    }
+    .rowTitle{
+      font-size:20px;
+      padding:8px;
+    }
+    .word{
+      font-size:19px;
+      margin-bottom:5px;
+    }
+    .scene{
+      transform:scale(.88);
+      transform-origin:top center;
+      height:78px;
+    }
   }
 
-  .catL,.catR{display:none}
-    footer{font-size:16px;flex-direction:column}
+  @media(max-width:850px){
+    body{
+      overflow:auto;
+    }
+    .poster{
+      min-height:auto;
+      justify-content:flex-start;
+      overflow:visible;
+    }
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      padding:10px 8px;
+      box-shadow:0 5px 12px rgba(0,0,0,.08);
+    }
+    .titleWrap{
+      gap:8px;
+    }
+    .titleIcon{
+      width:64px;
+      height:64px;
+    }
+    h1{
+      font-size:32px;
+      letter-spacing:1px;
+    }
+    .row{
+      grid-template-columns:100px repeat(2, 1fr);
+      min-height:auto;
+    }
+    .rowTitle{
+      grid-row:span 3;
+      font-size:16px;
+      padding:8px 4px;
+    }
+    .card{
+      min-height:122px;
+      padding:8px 4px;
+    }
+    .word{
+      font-size:17px;
+      min-height:24px;
+    }
+    .scene{
+      transform:scale(.82);
+      transform-origin:top center;
+      height:76px;
+    }
+    .catL,.catR{
+      display:none;
+    }
+  }
+
+  @media(max-width:520px){
+    .row{
+      grid-template-columns:82px repeat(2, 1fr);
+    }
+    .rowTitle{
+      font-size:14px;
+      line-height:1.1;
+    }
+    .card{
+      min-height:112px;
+    }
+    .word{
+      font-size:15px;
+    }
+    .scene{
+      transform:scale(.72);
+      height:68px;
+    }
+    h1{
+      font-size:26px;
+    }
+    .titleIcon{
+      width:52px;
+      height:52px;
+    }
   }
 </style>
 </head>
