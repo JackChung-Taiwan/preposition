@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -182,7 +181,7 @@
     opacity:0;
     transition:.2s;
   }
-  .card:hover .label{opacity:1}
+  .card:hover .label{opacity:0}
   footer{
     padding:18px;
     display:flex;
@@ -219,14 +218,22 @@
   .play[data-prep="at"] .move{animation:atPulse .8s ease-in-out}
   @keyframes atPulse{50%{transform:scale(1.25);filter:drop-shadow(0 0 10px #ff4747)}}
 
-  .play[data-prep="near"] .move{animation:nearMove .9s ease-in-out}
-  @keyframes nearMove{50%{transform:translateX(-24px)}100%{transform:translateX(0)}}
+  .play[data-prep="near"] .move{animation:nearScale .9s ease-in-out}
+  @keyframes nearScale{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.45);filter:drop-shadow(0 0 12px #ff4747)}
+    100%{transform:scale(1)}
+  }
 
   .play[data-prep="under"] .move{animation:underMove .9s ease-in-out}
   @keyframes underMove{50%{transform:translateY(18px)}100%{transform:translateY(0)}}
 
-  .play[data-prep="over"] .move{animation:overArc .95s ease-in-out}
-  @keyframes overArc{50%{transform:translate(22px,-36px)}100%{transform:translate(48px,0)}}
+  .play[data-prep="over"] .move{animation:overArc 1s ease-in-out}
+  @keyframes overArc{
+    0%{transform:translate(0,0)}
+    50%{transform:translate(58px,-84px)}
+    100%{transform:translate(96px,0)}
+  }
 
   .play[data-prep="below"] .move{animation:belowBounce .8s ease-in-out}
   @keyframes belowBounce{50%{transform:translateY(14px)}100%{transform:translateY(0)}}
@@ -246,8 +253,33 @@
   .play[data-prep="between"] .move{animation:betweenMove .9s ease-in-out}
   @keyframes betweenMove{50%{transform:translateX(0) scale(1.18)}}
 
-  .play[data-prep="behind"] .move{animation:hideBehind .9s ease-in-out}
-  @keyframes hideBehind{50%{transform:translateY(36px);opacity:.38}100%{transform:translateY(0);opacity:1}}
+  .ears{
+    position:absolute;
+    left:50px;
+    top:12px;
+    width:34px;
+    height:22px;
+    z-index:2;
+    transform-origin:center bottom;
+  }
+  .ears:before,.ears:after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    width:0;
+    height:0;
+    border-left:9px solid transparent;
+    border-right:9px solid transparent;
+    border-bottom:22px solid #c91414;
+    filter:drop-shadow(0 2px 0 #8d0a0a);
+  }
+  .ears:before{left:0;transform:rotate(-12deg)}
+  .ears:after{right:0;transform:rotate(12deg)}
+  .play[data-prep="behind"] .behind-cat{animation:behindMove .95s ease-in-out forwards}
+  @keyframes behindMove{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(24px)}
+  }
 
   .play[data-prep="front"] .move{animation:frontPulse .9s ease-in-out}
 
@@ -256,10 +288,12 @@
   50%{transform:scale(1.28)}
   100%{transform:scale(1)}
 }
+  .play[data-prep="along"] .along-arrow{
+    animation:alongRoad 1s ease forwards;
+  }
   @keyframes alongRoad{
-    0%{transform:rotate(10deg) translateY(0)}
-    50%{transform:rotate(10deg) translateY(44px)}
-    100%{transform:rotate(10deg) translateY(0)}
+    0%{transform:translateX(0)}
+    100%{transform:translateX(62px)}
   }
 
   .play[data-prep="across"] .across-arrow{
@@ -267,7 +301,7 @@
   }
   @keyframes acrossMove{
     0%{transform:translateX(0)}
-    100%{transform:translateX(60px)}
+    100%{transform:translateX(64px)}
   }
 
 
@@ -277,8 +311,11 @@
 }
 
 @keyframes rollUp{
-  0%   { transform:translate(0,0) rotate(0deg); }
-  100% { transform:translate(62px,-42px) rotate(360deg); }
+  0%{transform:translate(0,0) rotate(0deg)}
+  25%{transform:translate(20px,-10px) rotate(90deg)}
+  50%{transform:translate(40px,-22px) rotate(180deg)}
+  75%{transform:translate(60px,-34px) rotate(270deg)}
+  100%{transform:translate(76px,-46px) rotate(360deg)}
 }
 
   .play[data-prep="down"] .move{
@@ -286,8 +323,11 @@
 }
 
 @keyframes rollDown{
-  0%   { transform:translate(0,0) rotate(0deg); }
-  100% { transform:translate(-62px,42px) rotate(-360deg); }
+  0%{transform:translate(0,0) rotate(0deg)}
+  25%{transform:translate(-18px,12px) rotate(-90deg)}
+  50%{transform:translate(-38px,24px) rotate(-180deg)}
+  75%{transform:translate(-58px,36px) rotate(-270deg)}
+  100%{transform:translate(-78px,48px) rotate(-360deg)}
 }
 
   .play[data-prep="opposite"] .move{animation:oppositeMove .9s ease-in-out}
@@ -315,8 +355,22 @@
   .play[data-prep="beside"] .move{animation:besideMove .9s ease-in-out}
   @keyframes besideMove{50%{transform:translateX(-18px)}}
 
-  .play[data-prep="against"] .move{animation:againstBump .8s ease-in-out}
-  @keyframes againstBump{45%{transform:translateX(16px)}55%{transform:translateX(9px)}}
+  .against-img{
+    position:absolute;
+    width:96px;
+    height:96px;
+    object-fit:contain;
+    z-index:5;
+    filter:drop-shadow(0 3px 0 rgba(0,0,0,.15));
+  }
+  .play[data-prep="against"] .against-img{
+    animation:againstGlow 1s ease-in-out forwards;
+  }
+  @keyframes againstGlow{
+    0%{filter:drop-shadow(0 3px 0 rgba(0,0,0,.15))}
+    50%{filter:drop-shadow(0 0 10px #ffe066) drop-shadow(0 0 18px #ff7b00)}
+    100%{filter:drop-shadow(0 0 10px #ffe066) drop-shadow(0 0 18px #ff7b00)}
+  }
 
   .play[data-prep="fromto"] .fromto-ball{
   animation:fromToMove 1s ease forwards;
@@ -463,7 +517,7 @@
 <script>
 const rows = [
   {title:"PLACE<br>INSIDE &<br>ON TOP", line:"#78c7f2", tint:"#f7fcff", color:"#1167a6", items:[
-    ["in/inside","in","in"],["on","on","on"],["at","at","at"],["near","near","near"],["under","under","under"],["over","over","over"]
+    ["in/inside","in","in"],["on","on","on"],["under","under","under"],["at","at","at"],["near","near","near"],["over","over","over"]
   ]},
   {title:"PLACE<br>AROUND &<br>BETWEEN", line:"#92d574", tint:"#fbfff5", color:"#247834", items:[
     ["below","below","below"],["above","above","above"],["round/around","around","around"],["through","through","through"],["among","among","among"],["between","between","between"]
@@ -472,7 +526,7 @@ const rows = [
     ["behind","behind","behind"],["in front of","front","in front of"],["along","along","along"],["across","across","across"],["up","up","up"],["down","down","down"]
   ]},
   {title:"DIRECTION<br>& MOVEMENT", line:"#ff9faf", tint:"#fff7f8", color:"#b21d43", items:[
-    ["opposite","opposite","opposite"],["onto","onto","onto"],["off","off","off"],["into","into","into"],["out of","out","out of"],["past","past","past"]
+    ["opposite","opposite","opposite"],["off","off","off"],["into","into","into"],["out of","out","out of"]
   ]},
   {title:"POSITION<br>& RELATION", line:"#b69be8", tint:"#fbf8ff", color:"#56378c", items:[
     ["beside/<br>by/next to","beside","beside"],["against","against","against"],["from---to","fromto","from to"],["towards","towards","towards"]
@@ -491,58 +545,45 @@ function sceneFor(prep){
   if(prep==="at") return `<div class="table"></div>`+b("left:48px;top:9px");
   if(prep==="near") return box("left:58px;top:35px")+b("left:20px;top:48px");
   if(prep==="under") return `<div class="table"></div>`+b("left:48px;top:55px");
-  if(prep==="over") return box("left:38px;top:48px")+b("left:14px;top:48px")+`<div class="arrow" style="left:48px;top:8px">↷</div>`;
+  if(prep==="over") return box("left:40px;top:48px")+b("left:2px;top:48px")+`<div class="arrow" style="left:32px;top:4px;color:#d22">↷</div>`;
   if(prep==="below") return `<div class="bar" style="left:18px;top:24px"></div>`+b("left:48px;top:50px");
   if(prep==="above") return `<div class="bar" style="left:18px;top:56px"></div>`+b("left:48px;top:18px");
   if(prep==="around") return `<div class="star" style="left:48px;top:28px">⭐</div><div class="circleDots move" style="position:absolute;left:18px;top:8px;width:90px;height:74px">${[0,1,2,3,4,5,6,7].map((i)=>ball("",`left:${45+36*Math.cos(i*.785)}px;top:${34+28*Math.sin(i*.785)}px;width:20px;height:20px`)).join("")}</div>`;
   if(prep==="through") return box("left:32px;top:28px")+b("left:10px;top:38px")+`<div class="arrow" style="left:45px;top:35px">→</div>`;
   if(prep==="among") return [ [10,12,'#1976d2'],[50,8,'#1976d2'],[92,18,'#1976d2'],[18,62,'#1976d2'],[58,44,'#d22'],[96,62,'#1976d2']].map((p,i)=>ball(i===4?"move":"",`left:${p[0]}px;top:${p[1]}px;background:${p[2]}`)).join("");
   if(prep==="between") return wall("left:18px;top:20px",true)+wall("right:18px;top:20px",true)+b("left:46px;top:43px");
-  if(prep==="behind") return pet("🐱","move","left:38px;top:2px;z-index:2")+wall("left:36px;top:15px",true);
+  if(prep==="behind") return wall("left:36px;top:26px",true)+pet("🐱","move behind-cat","left:20px;top:42px;z-index:2");
  if(prep==="front") return wall("left:54px;top:23px",true)+pet("🐱","move","left:46px;top:42px;z-index:5");
   if(prep==="along") return `
-    <div style="position:absolute;left:18px;top:8px;width:92px;height:72px;border-radius:50%;background:#18e88a;border:3px solid #0bb86a;overflow:hidden">
-      <div style="position:absolute;left:20px;top:-10px;width:6px;height:100px;background:#111;transform:rotate(10deg)"></div>
-      <div style="position:absolute;left:48px;top:-10px;width:6px;height:100px;background:#111;transform:rotate(10deg)"></div>
-      <div style="position:absolute;left:72px;top:-10px;width:4px;height:100px;opacity:.45;transform:rotate(10deg);border-left:4px dashed #111;background:transparent"></div>
-      <div class="arrow move along-arrow" style="left:35px;top:4px;font-size:34px;color:#fff;text-shadow:2px 2px 0 #0b6b43">↓</div>
+    <div style="position:absolute;left:10px;top:28px;width:108px;height:42px;overflow:hidden">
+      <div style="position:absolute;left:0;top:9px;width:108px;height:6px;background:#111;border-radius:999px"></div>
+      <div style="position:absolute;left:0;top:27px;width:108px;height:6px;background:#111;border-radius:999px"></div>
+      <div style="position:absolute;left:8px;top:18px;width:88px;border-top:4px dashed #111;opacity:.45"></div>
+      <div class="arrow move along-arrow" style="left:0;top:1px;font-size:34px;color:#d71920;text-shadow:2px 2px 0 #fff">➜</div>
     </div>
   `;
   if(prep==="across") return `
-    <div style="position:absolute;left:18px;top:8px;width:92px;height:72px;border-radius:50%;background:#fff;border:3px solid #b7ead9;overflow:hidden">
-      <div style="position:absolute;left:35px;top:-10px;width:6px;height:100px;background:#111;transform:rotate(10deg)"></div>
-      <div style="position:absolute;left:64px;top:-10px;width:6px;height:100px;background:#111;transform:rotate(10deg)"></div>
-      <div class="arrow move across-arrow" style="left:10px;top:20px;font-size:34px;color:#333">→</div>
+    <div style="position:absolute;left:26px;top:6px;width:74px;height:78px;overflow:hidden">
+      <div style="position:absolute;left:20px;top:0;width:8px;height:78px;background:#111;border-radius:999px"></div>
+      <div style="position:absolute;left:46px;top:0;width:8px;height:78px;background:#111;border-radius:999px"></div>
+      <div style="position:absolute;left:35px;top:6px;height:66px;border-left:4px dashed #111;opacity:.45"></div>
+      <div class="arrow move across-arrow" style="left:-6px;top:20px;font-size:34px;color:#d71920;text-shadow:2px 2px 0 #fff">➜</div>
     </div>
   `;
   if(prep==="up") return `
-  <!-- 斜坡（往右上） -->
-  <div style="
-    position:absolute;
-    left:20px;
-    top:40px;
-    width:90px;
-    height:60px;
-    background:linear-gradient(to top right, transparent 0 50%, #d9a15f 50% 100%);
-  "></div>
-
-  <!-- 紅球（從左下開始） -->
-  <div class="ball move" style="left:18px;top:68px"></div>
-`;
+    <div style="position:absolute;left:28px;top:62px;width:22px;height:18px;background:#b9c7d5;border:2px solid #6b7d8d"></div>
+    <div style="position:absolute;left:50px;top:50px;width:22px;height:30px;background:#b9c7d5;border:2px solid #6b7d8d"></div>
+    <div style="position:absolute;left:72px;top:38px;width:22px;height:42px;background:#b9c7d5;border:2px solid #6b7d8d"></div>
+    <div style="position:absolute;left:94px;top:26px;width:22px;height:54px;background:#b9c7d5;border:2px solid #6b7d8d"></div>
+    <div class="ball move" style="left:8px;top:38px"></div>
+  `;
   if(prep==="down") return `
-  <!-- 斜坡（同方向） -->
-  <div style="
-    position:absolute;
-    left:20px;
-    top:40px;
-    width:90px;
-    height:60px;
-    background:linear-gradient(to top right, transparent 0 50%, #d9a15f 50% 100%);
-  "></div>
-
-  <!-- 紅球（從右上開始） -->
-  <div class="ball move" style="left:80px;top:10px"></div>
-`;
+    <div style="position:absolute;left:28px;top:62px;width:22px;height:18px;background:#b9c7d5;border:2px solid #6b7d8d"></div>
+    <div style="position:absolute;left:50px;top:50px;width:22px;height:30px;background:#b9c7d5;border:2px solid #6b7d8d"></div>
+    <div style="position:absolute;left:72px;top:38px;width:22px;height:42px;background:#b9c7d5;border:2px solid #6b7d8d"></div>
+    <div style="position:absolute;left:94px;top:26px;width:22px;height:54px;background:#b9c7d5;border:2px solid #6b7d8d"></div>
+    <div class="ball move" style="left:88px;top:-8px"></div>
+  `;
   if(prep==="opposite") return `<div class="emoji move opposite-left" style="left:4px;top:34px">🚗</div><div class="emoji move opposite-right" style="right:4px;top:34px;transform:scaleX(-1)">🚙</div><div class="arrow" style="left:0px;top:62px">←</div><div class="arrow" style="right:0px;top:62px">→</div>`;
   if(prep==="onto") return box("left:44px;top:44px")+pet("🐶","move","left:14px;top:14px");
   if(prep==="off") return box("left:30px;top:30px")+pet("🐶","move","left:42px;top:2px");
@@ -550,7 +591,9 @@ function sceneFor(prep){
   if(prep==="out") return box("left:28px;top:34px")+pet("🐶","move","left:42px;top:32px");
   if(prep==="past") return `<div class="wall" style="left:60px;top:24px;width:20px;height:66px;border-radius:999px"></div>`+pet("🐶","move","left:10px;top:40px");
   if(prep==="beside") return `<div class="emoji" style="left:20px;top:28px">🪴</div><div class="emoji move" style="left:62px;top:40px">🐶</div>`;
-  if(prep==="against") return wall("left:68px;top:14px",true)+pet("🐶","move","left:28px;top:42px");
+  if(prep==="against") return `
+    <img class="against-img move" style="left:14px;top:-2px" src="https://raw.githubusercontent.com/JackChung-Taiwan/preposition/main/against.png" alt="against">
+  `;
   if(prep==="fromto") return `
     <div style="position:absolute;left:16px;top:18px;font-size:22px;font-weight:900;color:#111">A</div>
     <div style="position:absolute;right:16px;top:18px;font-size:22px;font-weight:900;color:#111">B</div>
@@ -571,7 +614,7 @@ rows.forEach(row=>{
     <div class="card" data-prep="${prep}" data-say="${say}" onclick="playCard(this)">
       <div class="word">${label}</div>
       <div class="scene">${sceneFor(prep)}</div>
-      <div class="label">click: ${say}</div>
+      <div class="label"></div>
     </div>
   `).join("");
   grid.appendChild(div);
