@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -552,8 +553,8 @@ function sceneFor(prep){
   if(prep==="through") return box("left:32px;top:28px")+b("left:10px;top:38px")+`<div class="arrow" style="left:45px;top:35px">→</div>`;
   if(prep==="among") return [ [10,12,'#1976d2'],[50,8,'#1976d2'],[92,18,'#1976d2'],[18,62,'#1976d2'],[58,44,'#d22'],[96,62,'#1976d2']].map((p,i)=>ball(i===4?"move":"",`left:${p[0]}px;top:${p[1]}px;background:${p[2]}`)).join("");
   if(prep==="between") return wall("left:18px;top:20px",true)+wall("right:18px;top:20px",true)+b("left:46px;top:43px");
-  if(prep==="behind") return wall("left:36px;top:26px",true)+pet("🐱","move behind-cat","left:20px;top:42px;z-index:2");
- if(prep==="front") return wall("left:54px;top:23px",true)+pet("🐱","move","left:46px;top:42px;z-index:5");
+  if(prep==="behind") return wall("left:36px;top:2px",true)+pet("🐱","move behind-cat","left:20px;top:18px;z-index:2");
+ if(prep==="front") return wall("left:54px;top:-1px",true)+pet("🐱","move","left:46px;top:18px;z-index:5");
   if(prep==="along") return `
     <div style="position:absolute;left:10px;top:28px;width:108px;height:42px;overflow:hidden">
       <div style="position:absolute;left:0;top:9px;width:108px;height:6px;background:#111;border-radius:999px"></div>
@@ -590,7 +591,7 @@ function sceneFor(prep){
   if(prep==="into") return box("left:28px;top:34px")+pet("🐶","move","left:10px;top:22px");
   if(prep==="out") return box("left:28px;top:34px")+pet("🐶","move","left:42px;top:32px");
   if(prep==="past") return `<div class="wall" style="left:60px;top:24px;width:20px;height:66px;border-radius:999px"></div>`+pet("🐶","move","left:10px;top:40px");
-  if(prep==="beside") return `<div class="emoji" style="left:20px;top:28px">🪴</div><div class="emoji move" style="left:62px;top:40px">🐶</div>`;
+  if(prep==="beside") return `<div class="emoji" style="left:20px;top:4px">🪴</div><div class="emoji move" style="left:62px;top:16px">🐶</div>`;
   if(prep==="against") return `
     <img class="against-img move" style="left:14px;top:-2px" src="https://raw.githubusercontent.com/JackChung-Taiwan/preposition/main/against.png" alt="against">
   `;
