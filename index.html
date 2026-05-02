@@ -2,6 +2,13 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+ <link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#ffcc33">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Preposition">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Prepositions Animated Poster Game</title>
@@ -502,7 +509,16 @@
   }
 </style>
 </head>
-<body>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./service-worker.js")
+        .then(() => console.log("PWA Service Worker registered"))
+        .catch(err => console.error("Service Worker registration failed:", err));
+    });
+  }
+</script>
+ <body>
 <div class="poster">
   <header>
     
